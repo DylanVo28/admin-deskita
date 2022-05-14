@@ -30,7 +30,7 @@ class CustomerFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private val client =DeskitaService()
+    private val client = DeskitaService()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -46,49 +46,54 @@ class CustomerFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_customer, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
         //set list customer
-    try {
-        val prefs=activity?.getSharedPreferences("admin_deskita", Context.MODE_PRIVATE)
-        val token = prefs?.getString("TOKEN",null)!!
-        var res: JSONObject =client.getUsers("user",token);
+        try {
+            val prefs = activity?.getSharedPreferences("admin_deskita", Context.MODE_PRIVATE)
+            val token = prefs?.getString("TOKEN", null)!!
+            var res: JSONObject = client.getUsers("user", token);
 
-        var users=res.getJSONArray("user");
-        val array:ArrayList<Customer> = ArrayList()
-        for(i in 0 until users.length()){
-            val customer=users.getJSONObject(i)
-            val customerModel=Customer(customer.getString("_id"),
-                customer.getJSONObject("avatar").getString("url"),
-                customer.getString("name"),customer.getString("emailUser"),
-                customer.getString("phoneNumber")
-            )
-            array.add(customerModel)
-        }
-        val lvCustomers=view.findViewById(R.id.customers) as ListView
-        val adapter= context?.let { CustomersAdapter(it,R.layout.list_customer,array) }
-        lvCustomers.adapter=adapter
-
-        lvCustomers.onItemClickListener = object : AdapterView.OnItemClickListener {
-
-            override fun onItemClick(parent: AdapterView<*>, view: View,
-                                     position: Int, id: Long) {
-
-                // value of item that is clicked
-                val preferences= activity?.getSharedPreferences("admin_deskita", Context.MODE_PRIVATE)
-                val id=array.get(position).id
-                preferences?.edit()?.putString("customer_id",id)?.apply()
-
-                findNavController().navigate(R.id.to_customerDetailFragment)
+            var users = res.getJSONArray("user");
+            val array: ArrayList<Customer> = ArrayList()
+            for (i in 0 until users.length()) {
+                val customer = users.getJSONObject(i)
+                val customerModel = Customer(
+                    customer.getString("_id"),
+                    customer.getJSONObject("avatar").getString("url"),
+                    customer.getString("name"), customer.getString("emailUser"),
+                    customer.getString("phoneNumber")
+                )
+                array.add(customerModel)
             }
-        }
+            val lvCustomers = view.findViewById(R.id.customers) as ListView
+            val adapter = context?.let { CustomersAdapter(it, R.layout.list_customer, array) }
+            lvCustomers.adapter = adapter
 
-    }catch (e:Exception){
-        Log.d("error",e.printStackTrace().toString())
-    }
+            lvCustomers.onItemClickListener = object : AdapterView.OnItemClickListener {
+
+                override fun onItemClick(
+                    parent: AdapterView<*>, view: View,
+                    position: Int, id: Long
+                ) {
+
+                    // value of item that is clicked
+                    val preferences =
+                        activity?.getSharedPreferences("admin_deskita", Context.MODE_PRIVATE)
+                    val id = array.get(position).id
+                    preferences?.edit()?.putString("customer_id", id)?.apply()
+
+                    findNavController().navigate(R.id.to_customerDetailFragment)
+                }
+            }
+
+        } catch (e: Exception) {
+            Log.d("error", e.printStackTrace().toString())
+        }
     }
 
 
