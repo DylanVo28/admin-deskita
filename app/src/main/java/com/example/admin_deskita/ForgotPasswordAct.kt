@@ -28,14 +28,12 @@ class ForgotPasswordAct : AppCompatActivity() {
                 val res: JSONObject = client.sendEmail(inputEmailFp.text.toString())
                 val code = res.getInt("numberToken")
 
-                val preferences = getSharedPreferences("admin_deskita", Context.MODE_PRIVATE)
-                preferences?.edit()?.putInt("code", code)?.apply()
-
                 Toast.makeText(
                     this, "Gửi email thành công",
                     Toast.LENGTH_LONG
                 ).show()
                 val intent = Intent(this,RecoveryPasswordAct::class.java)
+                intent.putExtra("code",code)
                 startActivity(intent)
 
             } catch (e: Exception) {

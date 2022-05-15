@@ -11,9 +11,8 @@ class RecoveryPasswordAct : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_recovery_password)
-        val prefs= getSharedPreferences("admin_deskita", Context.MODE_PRIVATE)
-        val code = prefs?.getInt("code",0)!!
-        et_code.setText(code)
+        val code = intent.getIntExtra("code",0)
+        et_code.setText(code.toString())
     }
 
     fun goBack(view: View) {
