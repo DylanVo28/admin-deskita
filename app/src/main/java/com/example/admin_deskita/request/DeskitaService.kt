@@ -172,4 +172,22 @@ class DeskitaService : Fragment() {
         val jsonData = response.body()?.string();
         return JSONObject(jsonData)
     }
+
+    fun confirmPassword(code:Int,password:String,confirmPassword:String):JSONObject{
+        var json = JSONObject()
+        json.put("password",password)
+        json.put("confirmPassword",confirmPassword)
+        val jsonType = MediaType.parse("application/json; charset=utf-8")
+        val reqBody = RequestBody.create(jsonType, json.toString())
+
+        val request=Request.Builder()
+            .header("User-Agent", "OkHttp Headers.java")
+            .addHeader("Accept", "application/json")
+            .put(reqBody)
+            .url(url+"/user/password/reset?code=${code}")
+            .build()
+        val response = client.newCall(request).execute()
+        val jsonData = response.body()?.string();
+        return JSONObject(jsonData)
+    }
 }
