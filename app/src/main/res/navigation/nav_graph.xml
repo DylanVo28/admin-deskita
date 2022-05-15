@@ -46,9 +46,4 @@
             app:destination="@id/itCustomers" />
     </fragment>
 
-    <fragment
-        android:id="@+id/itDiscount"
-        android:name="com.example.admin_deskita.DiscountFragment"
-        android:label="fragment_discount"
-        tools:layout="@layout/fragment_discount" />
 </navigation>
