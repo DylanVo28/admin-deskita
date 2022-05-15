@@ -25,8 +25,8 @@ class ForgotPasswordAct : AppCompatActivity() {
         setContentView(R.layout.act_forgot_password)
         btnSendEmail.setOnClickListener {
             try {
-//                val res: JSONObject = client.sendEmail(inputEmailFp.text.toString())
-//                val code = res.getInt("numberToken")
+                val res: JSONObject = client.sendEmail(inputEmailFp.text.toString())
+                val code = res.getInt("numberToken")
 
 //                val preferences = getSharedPreferences("admin_deskita", Context.MODE_PRIVATE)
 //                preferences?.edit()?.putInt("code", code)?.apply()
@@ -36,6 +36,7 @@ class ForgotPasswordAct : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
                 val intent = Intent(this,RecoveryPasswordAct::class.java)
+                intent.putExtra("code",code)
                 startActivity(intent)
 
             } catch (e: Exception) {
