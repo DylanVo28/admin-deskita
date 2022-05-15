@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
                 val preferences= this.getSharedPreferences("admin_deskita", Context.MODE_PRIVATE)
                 preferences?.edit()?.putString("TOKEN",token)?.apply()
 
-                val intent = Intent(this,MainActivity::class.java)
+                val intent = Intent(this,ConfirmActivity::class.java);
                 startActivity(intent)
             }catch(e: Exception){
 //code that handles exception

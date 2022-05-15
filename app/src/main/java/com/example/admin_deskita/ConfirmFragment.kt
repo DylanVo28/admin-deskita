@@ -1,16 +1,16 @@
 package com.example.admin_deskita
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.example.admin_deskita.request.DeskitaService
 import com.example.admin_deskita.support.OTPService
 
@@ -64,7 +64,10 @@ class ConfirmFragment : Fragment() {
             val confirmOTP:EditText=view.findViewById(R.id.etConfirmOTP)
             val res:Boolean=otp.verifyCode(confirmOTP.text.toString())
             if(res==true){
-                //findNavController().navigate(R.id.action_ConfirmFragment_to_SecondFragment)
+                val intent = Intent(activity, MainActivity::class.java)
+                startActivity(intent)
+
+//                findNavController().navigate(R.id.action_ConfirmFragment_to_SecondFragment)
             }
             else{
                 Toast.makeText(
