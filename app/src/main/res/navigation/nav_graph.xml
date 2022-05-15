@@ -23,6 +23,11 @@
         android:label=""
         tools:layout="@layout/fragment_analytic"></fragment>
     <fragment
+        android:id="@+id/itDiscounts"
+        android:name="com.example.admin_deskita.DiscountFragment"
+        android:label=""
+        tools:layout="@layout/fragment_discount"></fragment>
+    <fragment
         android:id="@+id/itProfile"
         android:name="com.example.admin_deskita.ProfileFragment"
         android:label="fragment_profile"

@@ -15,6 +15,17 @@ class DeskitaService : Fragment() {
     val client = OkHttpClient()
     val url="https://deskita-ecommerce.herokuapp.com/api/v1"
 
+    fun getDiscounts(token: String): JSONObject {
+        val request = Request.Builder()
+            .header("User-Agent", "OkHttp Headers.java")
+            .addHeader("Accept", "application/json")
+            .method("GET", null)
+            .url(url+"/admin/discounts?userToken=${token}")
+            .build()
+        val response = client.newCall(request).execute()
+        val jsonData = response.body()?.string();
+        return JSONObject(jsonData)
+    }
 
     fun getOrders(): String {
         val request = Request.Builder()

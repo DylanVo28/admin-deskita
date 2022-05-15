@@ -22,4 +22,8 @@
     <item android:id="@+id/itOrders"
         android:title="@string/orders"
         android:icon="@drawable/orders"/>
+
+    <item android:id="@+id/itDiscounts"
+        android:title="@string/discount"
+        android:icon="@drawable/discountss"/>
 </menu>
